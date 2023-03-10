@@ -91,7 +91,7 @@ fit_to_data_func <- function(breakpoints,
     } else {
       init_update <- c(
         t = times[1],
-        unlist(lapply(unname(out_mle[[j - 1]]), tail, 1))
+        unlist(lapply(unname(out_mle[[j - 1]]), utils::tail, 1))
       )
       beta_est <- (mles[j - 1, 1] / params$gamma) * rho
       pars <- c(beta_est, fit_pars$init_value[2]) # mles[j-1,-1]
@@ -153,7 +153,7 @@ fit_to_data_func <- function(breakpoints,
 
     # plot for quick check of fit
     plot(daily_cases[[j]] ~ times, type = "l")
-    points(times, case_data_sub$inc, pch = 16, col = "red")
+    graphics::points(times, case_data_sub$inc, pch = 16, col = "red")
   } # end of for loop over breakpoints
 
   todays_date <- Sys.Date()
