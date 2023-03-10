@@ -3,7 +3,6 @@
 #' @param x vector of probabilities
 #' @return List of summary results
 #' @keywords vacamole
-#' @importFrom stats rmultinom
 #' @export
 my_rmultinom <- function(x) {
   size <- x[1]
@@ -16,7 +15,5 @@ my_rmultinom <- function(x) {
   } else {
     prob_vec <- c(p1, p2)
   }
-  # print(size)
-  # print(prob_vec)
-  rmultinom(n = 1, size = size, prob = prob_vec)
+  stats::rmultinom(n = 1, size = size, prob = prob_vec)
 }

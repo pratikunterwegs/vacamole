@@ -1,10 +1,8 @@
 #' Convert contact matrices to transmission matrices
 #' @param x data frame with contacts
+#' @importFrom dplyr select mutate filter
+#' @importFrom tidyr pivot_wider
 #' @return list of contact matrices
-#' @import dplyr
-#' @import tidyr
-#' @importFrom plyr aaply
-#' @importFrom plyr laply
 #' @keywords vacamole
 #' @export
 convert_contact_matrices <- function(x) {
@@ -34,7 +32,7 @@ convert_contact_matrices <- function(x) {
   }
 
   # add mean to list of matrices
-  tmp_mean <- aaply(laply(rtn, as.matrix), c(2, 3), mean)
+  tmp_mean <- plyr::aaply(plyr::laply(rtn, as.matrix), c(2, 3), mean)
   rtn$mean <- tmp_mean
 
   return(rtn)

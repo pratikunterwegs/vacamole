@@ -1,9 +1,10 @@
-#TODO refer to manuscript or somewhere else for explanation of each compartment symbol
+# TODO refer to manuscript or somewhere else for explanation of each compartment symbol
 #' Postprocess output from age-structured SEIR ODE model of vaccination
 #' with 2 doses and delay to protection
 #' @param dat output from seir model as a data frame
 #' @return List of summary results
 #' @keywords vacamole
+#' @importFrom dplyr select
 #' @importFrom stringr str_detect
 #' @export
 postprocess_age_struct_model_output2 <- function(dat) {
@@ -30,7 +31,7 @@ postprocess_age_struct_model_output2 <- function(dat) {
     select(names(dat)[str_detect(names(dat), pattern = "Shold_5d[:digit:]")])
   Sv_5d <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "Sv_5d[:digit:]")])
-  
+
   # E ----------
   E <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "E[:digit:]")])
@@ -44,7 +45,7 @@ postprocess_age_struct_model_output2 <- function(dat) {
     select(names(dat)[str_detect(names(dat), pattern = "Ev_4d[:digit:]")])
   Ev_5d <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "Ev_5d[:digit:]")])
-  
+
   # I ----------
   I <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "I[:digit:]")])
@@ -58,7 +59,7 @@ postprocess_age_struct_model_output2 <- function(dat) {
     select(names(dat)[str_detect(names(dat), pattern = "Iv_4d[:digit:]")])
   Iv_5d <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "Iv_5d[:digit:]")])
-  
+
   # H ----------
   H <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "H[:digit:]")])
@@ -72,7 +73,7 @@ postprocess_age_struct_model_output2 <- function(dat) {
     select(names(dat)[str_detect(names(dat), pattern = "Hv_4d[:digit:]")])
   Hv_5d <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "Hv_5d[:digit:]")])
-  
+
   # H_IC -------
   H_IC <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "H_IC[:digit:]")])
@@ -86,7 +87,7 @@ postprocess_age_struct_model_output2 <- function(dat) {
     select(names(dat)[str_detect(names(dat), pattern = "H_ICv_4d[:digit:]")])
   H_ICv_5d <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "H_ICv_5d[:digit:]")])
-  
+
   # IC ---------
   IC <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "IC[:digit:]")]) %>%
@@ -106,11 +107,11 @@ postprocess_age_struct_model_output2 <- function(dat) {
   ICv_5d <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "ICv_5d[:digit:]")]) %>%
     select(-names(dat)[str_detect(names(dat), pattern = "H_ICv_5d[:digit:]")])
-  
+
   # D ----------
   D <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "D[:digit:]")])
-  
+
   # R ----------
   R <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "R[:digit:]")])
@@ -124,7 +125,7 @@ postprocess_age_struct_model_output2 <- function(dat) {
     select(names(dat)[str_detect(names(dat), pattern = "Rv_4d[:digit:]")])
   Rv_5d <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "Rv_5d[:digit:]")])
-  
+
   # R_1w ------
   R_1w <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "R_1w[:digit:]")])
@@ -138,7 +139,7 @@ postprocess_age_struct_model_output2 <- function(dat) {
     select(names(dat)[str_detect(names(dat), pattern = "Rv_4d_1w[:digit:]")])
   Rv_5d_1w <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "Rv_5d_1w[:digit:]")])
-  
+
   # R_2w ------
   R_2w <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "R_2w[:digit:]")])
@@ -152,7 +153,7 @@ postprocess_age_struct_model_output2 <- function(dat) {
     select(names(dat)[str_detect(names(dat), pattern = "Rv_4d_2w[:digit:]")])
   Rv_5d_2w <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "Rv_5d_2w[:digit:]")])
-  
+
   # R_3w ------
   R_3w <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "R_3w[:digit:]")])
@@ -166,7 +167,7 @@ postprocess_age_struct_model_output2 <- function(dat) {
     select(names(dat)[str_detect(names(dat), pattern = "Rv_4d_3w[:digit:]")])
   Rv_5d_3w <- dat %>%
     select(names(dat)[str_detect(names(dat), pattern = "Rv_5d_3w[:digit:]")])
-  
+
   # output ----
   rtn <- list(
     S = S,

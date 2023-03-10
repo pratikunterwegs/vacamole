@@ -49,3 +49,6 @@ inst/doc
 
 /doc/
 /Meta/
+
+# ignore Mac file
+.DS_Store

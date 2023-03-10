@@ -4,10 +4,10 @@
 \alias{summarise_results}
 \title{Summarise output from SEIR model for plotting}
 \usage{
-summarise_results(seir_output, params, start_date, times, vac_inputs)
+summarise_results(seir_output, params, t_vec)
 }
 \arguments{
-\item{seir_output}{list of dataframes from postprocessing}
+\item{seir_output}{list of dataframes from post-processing}
 
 \item{params}{list of parameter values}
 
