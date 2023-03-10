@@ -1,14 +1,19 @@
 #' Determine contact matrix based on thresholds of cases or IC admissions
+#'
 #' @param times vector of time points
 #' @param params list of parameter values
-#' @param criteria criteria by which to change contact matrix. User can choose between a number of
-#' cases per day or a number of IC admissions.
-#' @param flag_relaxed an integer value that becomes non-zero (positive) when the contact matrix consistent with
-#' "relaxed" non-pharmaceutical interventions is being used.
-#' @param flag_very_relaxed an integer value that becomes non-zero (positive) when the contact matrix consistent with
-#' "very relaxed" non-pharmaceutical interventions is being used.
-#' @param flag_normal an integer value that becomes non-zero (positive) when the contact matrix consistent with
-#' normal (pre-pandemic) contact patterns is being used.
+#' @param criteria criteria by which to change contact matrix.
+#' User can choose between a number of cases per day or a number of IC
+#' admissions.
+#' @param flag_relaxed an integer value that becomes non-zero (positive) when
+#' the contact matrix consistent with "relaxed" non-pharmaceutical interventions
+#' is being used.
+#' @param flag_very_relaxed an integer value that becomes non-zero (positive)
+#' when the contact matrix consistent with "very relaxed" non-pharmaceutical
+#' interventions is being used.
+#' @param flag_normal an integer value that becomes non-zero (positive) when the
+#' contact matrix consistent with normal (pre-pandemic) contact patterns is
+#' being used.
 #' @param keep_fixed logical. if TRUE the contact matrix stays fixed over the
 #' entire simulation period
 #' @return List of summary results
@@ -24,7 +29,7 @@ choose_contact_matrix <- function(times,
                                   keep_fixed) {
   # define variables from params
   c_start <- params$c_start
-  if (!is.null(c_start) & keep_fixed) {
+  if (!is.null(c_start) && keep_fixed) {
     contact_matrix <- c_start
   } else {
     thresh_n <- params$thresh_n
@@ -61,9 +66,9 @@ choose_contact_matrix <- function(times,
       }
     }
     # for contact matrix
-    if (flag_relaxed > 0 & flag_very_relaxed == 0) {
+    if (flag_relaxed > 0 && flag_very_relaxed == 0) {
       contact_matrix <- c_relaxed
-    } else if (flag_very_relaxed > 0 & flag_normal == 0) {
+    } else if (flag_very_relaxed > 0 && flag_normal == 0) {
       contact_matrix <- c_very_relaxed
     } else if (flag_normal > 0) {
       contact_matrix <- c_normal

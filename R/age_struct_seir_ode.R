@@ -1,4 +1,5 @@
-#' Age-structured SEIR ODE model of vaccination with 2 doses and delay to protection
+#' Age-structured SEIR ODE model of vaccination with 2 doses and delay to
+#' protection
 #' @param times vector of times
 #' @param init list of initial states
 #' @param params list of parameter values
@@ -8,7 +9,6 @@
 # Define model -----------------------------------------------------
 age_struct_seir_ode <- function(times, init, params) {
   with(as.list(c(params, init)), {
-    # print(t)
     # define initial state vectors from input ----------------------
     S <- c(S1, S2, S3, S4, S5, S6, S7, S8, S9)
     Shold_1d <- c(

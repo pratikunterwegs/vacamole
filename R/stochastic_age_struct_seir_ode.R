@@ -49,7 +49,6 @@ stochastic_age_struct_seir_ode <- function(times, init, params) {
   )
 
   for (t in 1:length(time_vec)) {
-    # cat("time point: ", t, "\n")
 
     # define initial state vectors from input ----------------------
     if (t == 1) {
@@ -143,31 +142,35 @@ stochastic_age_struct_seir_ode <- function(times, init, params) {
     # determine force of infection ----------------------------------
     calendar_day <- params$t_calendar_start + time_vec[t]
     beta_t <- beta * (1 + beta1 * cos(2 * pi * calendar_day / 365.24))
-    # lambda <- beta * (contact_mat %*% (I + (eta_trans * Iv_1d) + (eta_trans2 * Iv_2d)))
     lambda <- beta_t * (contact_mat %*% (I + (eta_trans * Iv_1d) + (eta_trans2 * Iv_2d)))
-    # lambda <- ifelse(lambda < 0, 0, lambda)
-    # print(lambda)
     # ---------------------------------------------------------------
     ### probabilities of transitioning
     # from S
-    p_S_ <- as.numeric(1 - exp(-lambda - alpha)) # total probability of moving from S
-    p_S_Shold1 <- as.numeric(alpha / (lambda + alpha)) # relative probability of moving from S -> Shold_1d
-    p_S_Shold1 <- ifelse(is.nan(p_S_Shold1), 0, p_S_Shold1) # restrict probability to be a number
-    p_S_E <- 1 - p_S_Shold1 # relative probability of moving from S -> E
-    p_S_E <- ifelse(is.nan(p_S_E) & alpha, 0, p_S_E) # restrict probability to be a number
-    # from Shold_1d
-    p_Shold1_ <- as.numeric(1 - exp(-lambda - (1 / delay))) # total probability of moving from Shold_1d
-    # p_Shold1_ <- ifelse(p_Shold1_ < 0, 0, p_Shold1_)
-    p_Shold1_E <- as.numeric(lambda / (lambda + (1 / delay))) # relative probability of moving from Shold_1d -> E
-    p_Shold1_Sv1 <- as.numeric((1 / delay) / (lambda + (1 / delay))) # relative probability of moving from Shold_1d -> Sv1
-    # from Sv_1d
-    p_Sv1_ <- as.numeric(1 - exp(-eta * lambda - alpha2)) # total probability of moving from Sv1
-    # p_Sv1_ <- ifelse(p_Sv1_ < 0, 0, p_Sv1_)
-    p_Sv1_Shold2 <- as.numeric(alpha2 / (eta * lambda + alpha2)) # relative probability of moving from Sv1 -> Shold_2d
+    # total probability of moving from S
+    p_S_ <- as.numeric(1 - exp(-lambda - alpha))
+    # relative probability of moving from S -> Shold_1d
+    p_S_Shold1 <- as.numeric(alpha / (lambda + alpha))
+    # restrict probability to be a number
+    p_S_Shold1 <- ifelse(is.nan(p_S_Shold1), 0, p_S_Shold1)
+    # relative probability of moving from S -> E
+    p_S_E <- 1 - p_S_Shold1
+    # restrict probability to be a number
+    p_S_E <- ifelse(is.nan(p_S_E) & alpha, 0, p_S_E)
+    # from Shold_1d, # total probability of moving from Shold_1d
+    p_Shold1_ <- as.numeric(1 - exp(-lambda - (1 / delay)))
+    # relative probability of moving from Shold_1d -> E
+    p_Shold1_E <- as.numeric(lambda / (lambda + (1 / delay)))
+    # relative probability of moving from Shold_1d -> Sv1
+    p_Shold1_Sv1 <- as.numeric((1 / delay) / (lambda + (1 / delay)))
+    # from Sv_1d, # total probability of moving from Sv1
+    p_Sv1_ <- as.numeric(1 - exp(-eta * lambda - alpha2))
+    # relative probability of moving from Sv1 -> Shold_2d
+    p_Sv1_Shold2 <- as.numeric(alpha2 / (eta * lambda + alpha2))
     p_Sv1_Shold2 <- ifelse(is.nan(p_Sv1_Shold2), 0, p_Sv1_Shold2)
-    p_Sv1_Ev1 <- 1 - p_Sv1_Shold2 # relative probability of moving from Sv1 -> Ev1
-    # from Shold_2d
-    p_Shold2_ <- as.numeric(1 - exp(-eta * lambda - (1 / delay2))) # total probability of moving from Shold_2s
+    # relative probability of moving from Sv1 -> Ev1
+    p_Sv1_Ev1 <- 1 - p_Sv1_Shold2
+    # from Shold_2d, # total probability of moving from Shold_2s
+    p_Shold2_ <- as.numeric(1 - exp(-eta * lambda - (1 / delay2)))
     # p_Shold2_ <- ifelse(p_Shold2_ < 0, 0, p_Shold2_)
     p_Shold2_Sv2 <- as.numeric((1 / delay2) / (eta * lambda + (1 / delay2))) # relative probability of moving from Shold_2d -> Sv2
     p_Shold2_Ev1 <- as.numeric(eta * lambda / (eta * lambda + (1 / delay2))) # relative probability of moving from Shold_2d -> Ev1
