@@ -7,3 +7,5 @@
 ^pkgdown$
 ^inst$
 ^vignettes$
+^README\.Rmd$
+^\.github$
