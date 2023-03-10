@@ -2,7 +2,8 @@
 % Please edit documentation in R/age_struct_seir_ode.R
 \name{age_struct_seir_ode}
 \alias{age_struct_seir_ode}
-\title{Age-structured SEIR ODE model of vaccination with 2 doses and delay to protection}
+\title{Age-structured SEIR ODE model of vaccination with 2 doses and delay to
+protection}
 \usage{
 age_struct_seir_ode(times, init, params)
 }
@@ -17,6 +18,7 @@ age_struct_seir_ode(times, init, params)
 List of summary results
 }
 \description{
-Age-structured SEIR ODE model of vaccination with 2 doses and delay to protection
+Age-structured SEIR ODE model of vaccination with 2 doses and delay to
+protection
 }
 \keyword{vacamole}

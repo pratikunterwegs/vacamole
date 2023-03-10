@@ -4,14 +4,26 @@
 \alias{get_foi}
 \title{Calculate force of infection}
 \usage{
-get_foi(dat, params, vac_inputs)
+get_foi(x, y1, y2, y3, y4, y5, beta, contact_mat, times)
 }
 \arguments{
-\item{dat}{data frame of states}
+\item{x}{list of data frames for each state from SEIR model}
 
-\item{params}{list of parameter values}
+\item{y1}{data frame of protection against transmission due to vaccination from dose 1 at each time point}
 
-\item{vac_inputs}{vaccination inputs (output from convert_vac_schedule())}
+\item{y2}{data frame of protection against transmission due to vaccination from dose 2 at each time point}
+
+\item{y3}{data frame of protection against transmission due to vaccination from dose 3 at each time point}
+
+\item{y4}{data frame of protection against transmission due to vaccination from dose 4 at each time point}
+
+\item{y5}{data frame of protection against transmission due to vaccination from dose 5 at each time point}
+
+\item{beta}{vector of values of transmission rate for each time point}
+
+\item{contact_mat}{contact matrix}
+
+\item{times}{vector of time points that correspond to the rows of x}
 }
 \value{
 matrix of force of infection in each age group (columns) at each
